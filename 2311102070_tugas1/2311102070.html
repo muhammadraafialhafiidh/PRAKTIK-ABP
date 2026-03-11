@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramadan Real-Time - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --primary: #064e3b;
             --accent: #fbbf24;
         }
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background: linear-gradient(-45deg, #064e3b, #065f46, #047857, #064e3b);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -26,9 +29,17 @@
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .ultra-glass {
@@ -55,14 +66,22 @@
             font-weight: 800;
             border-radius: 50px;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .card-jadwal {
@@ -73,7 +92,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        
+
         .card-jadwal:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-10px);
@@ -95,19 +114,21 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container py-5">
         <div class="row justify-content-center text-center">
             <div class="col-lg-10">
-                
+
                 <div class="mb-4">
                     <h1 class="arabic-hero mb-0">رمضان مبارك</h1>
                     <h2 class="display-5 fw-bold text-white">Ramadan Kareem 1447H</h2>
                 </div>
 
                 <div class="ultra-glass p-5 mb-5 shadow-lg">
-                    <p class="fs-5 mb-4 opacity-75">Klik tombol di bawah untuk mendapatkan kejutan berkah Ramadan hari ini!</p>
+                    <p class="fs-5 mb-4 opacity-75">Klik tombol di bawah untuk mendapatkan kejutan berkah Ramadan hari
+                        ini!</p>
                     <button class="btn-thr-lux shadow" data-bs-toggle="modal" data-bs-target="#thrModal">
                         🎁 KLAIM HADIAH THR 🎁
                     </button>
@@ -157,10 +178,10 @@
                     <h2 class="fw-bold">Selamat!</h2>
                     <p class="text-muted fs-5">Anda mendapatkan paket THR Berkah:</p>
                     <div class="p-3 bg-light rounded-4 border border-success border-dashed my-4">
-                        <h4 class="text-success fw-bold mb-0">MAKAN SIANG GRATIS</h4>
-                        <small class="text-secondary">(Syarat: Berlaku setelah Maghrib 😉)</small>
+                        <h4 class="text-success fw-bold mb-0">RP. 100.000</h4>
                     </div>
-                    <button class="btn btn-success w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">Aamiin, Terima Kasih!</button>
+                    <button class="btn btn-success w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">Aamiin,
+                        Terima Kasih!</button>
                 </div>
             </div>
         </div>
@@ -173,22 +194,22 @@
         // FUNGSI JAM REAL-TIME
         function updateClock() {
             const now = new Date();
-            
+
             // Format waktu WIB (Asia/Jakarta)
-            const timeOptions = { 
-                timeZone: 'Asia/Jakarta', 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit', 
-                hour12: false 
+            const timeOptions = {
+                timeZone: 'Asia/Jakarta',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
             };
-            
-            const dateOptions = { 
-                timeZone: 'Asia/Jakarta', 
-                weekday: 'long', 
-                day: 'numeric', 
-                month: 'long', 
-                year: 'numeric' 
+
+            const dateOptions = {
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
             };
 
             const timeString = new Intl.DateTimeFormat('id-ID', timeOptions).format(now);
@@ -215,4 +236,5 @@
         });
     </script>
 </body>
+
 </html>
