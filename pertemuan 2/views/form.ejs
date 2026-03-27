@@ -1,0 +1,62 @@
+<%- include('./partials/header.ejs') %>
+
+<!-- Prevent scrolling specifically on this form page -->
+<style>
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card mb-4 mt-2">
+            <div class="card-header bg-white py-3">
+                <h4 class="mb-0 text-primary fw-bold">
+                    <i class="bi bi-pencil-square"></i> <%= title %>
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/save" method="POST">
+                    <!-- Input ID Tersembunyi untuk Update -->
+                    <% if (student && student.id) { %>
+                        <input type="hidden" name="id" value="<%= student.id %>">
+                    <% } %>
+
+                    <div class="mb-3">
+                        <label for="nim" class="form-label fw-bold">NIM</label>
+                        <input type="text" class="form-control form-control-lg" id="nim" name="nim" 
+                            value="<%= student ? student.nim : '' %>" required 
+                            placeholder="Masukkan NIM">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">Nama Lengkap</label>
+                        <input type="text" class="form-control form-control-lg" id="name" name="name" 
+                            value="<%= student ? student.name : '' %>" required 
+                            placeholder="Masukkan Nama Lengkap">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="jurusan" class="form-label fw-bold">Jurusan</label>
+                        <select class="form-select form-select-lg" id="jurusan" name="jurusan" required 
+                                onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
+                            <option value="">-- Pilih Jurusan --</option>
+                            <option value="Teknik Informatika" <%= student && student.jurusan === 'Teknik Informatika' ? 'selected' : '' %>>Teknik Informatika</option>
+                            <option value="Sistem Informasi" <%= student && student.jurusan === 'Sistem Informasi' ? 'selected' : '' %>>Sistem Informasi</option>
+                            <option value="Teknik Komputer" <%= student && student.jurusan === 'Teknik Komputer' ? 'selected' : '' %>>Teknik Komputer</option>
+                            <option value="Bisnis Digital" <%= student && student.jurusan === 'Bisnis Digital' ? 'selected' : '' %>>Bisnis Digital</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="/data" class="btn btn-secondary btn-lg me-md-2">Batal</a>
+                        <button type="submit" class="btn btn-primary btn-lg">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>
