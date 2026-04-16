@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas AJAX - Profil Data</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 30px 16px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-size: 1.8rem;
+        }
+
+        p.sub {
+            text-align: center;
+            color: #666;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+        }
+
+        .tombol-area {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        #btn-tampilkan {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 11px 28px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #btn-tampilkan:hover {
+            background-color: #2980b9;
+        }
+
+        #btn-tampilkan:disabled {
+            background-color: #90c4e4;
+            cursor: not-allowed;
+        }
+
+        #pesan-error {
+            display: none;
+            background-color: #fdecea;
+            border-left: 4px solid #e74c3c;
+            color: #c0392b;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 0 auto 20px;
+            max-width: 700px;
+            font-size: 0.9rem;
+        }
+
+        #hasil-profil {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .kartu {
+            background-color: #fff;
+            border: 1px solid #dce1e7;
+            border-radius: 8px;
+            padding: 22px 20px;
+            width: 200px;
+            flex: 1 1 200px;
+            max-width: 240px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+            transition: box-shadow 0.2s;
+        }
+
+        .kartu:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        .inisial {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .kartu h3 {
+            margin: 0 0 4px;
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+
+        .kartu .jabatan {
+            display: inline-block;
+            background-color: #eaf4fd;
+            color: #2980b9;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .kartu .detail {
+            font-size: 0.83rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .kartu .detail span {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 0.78rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 500px) {
+            .kartu {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Data Profil Karyawan</h1>
+    <p class="sub">Klik tombol di bawah untuk memuat data dari server menggunakan AJAX</p>
+
+    <div class="tombol-area">
+        <button id="btn-tampilkan">Tampilkan Profil</button>
+    </div>
+
+    <div id="pesan-error"></div>
+
+    <div id="hasil-profil"></div>
+
+    <script>
+        var tombol = document.getElementById('btn-tampilkan');
+        var hasilDiv = document.getElementById('hasil-profil');
+        var pesanError = document.getElementById('pesan-error');
+
+        tombol.addEventListener('click', function () {
+            // Reset tampilan sebelumnya
+            hasilDiv.innerHTML = '';
+            pesanError.style.display = 'none';
+
+            // Ubah teks tombol saat loading
+            tombol.textContent = 'Memuat...';
+            tombol.disabled = true;
+
+            // Kirim request ke data.php menggunakan fetch()
+            fetch('data.php')
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Gagal mengambil data. Status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    tombol.textContent = 'Tampilkan Profil';
+                    tombol.disabled = false;
+
+                    // Loop tiap data dan buat elemen kartu
+                    data.forEach(function (profil) {
+                        var inisial = profil.nama.split(' ').map(function (k) {
+                            return k[0];
+                        }).join('').substring(0, 2).toUpperCase();
+
+                        var kartu = document.createElement('div');
+                        kartu.className = 'kartu';
+
+                        kartu.innerHTML =
+                            '<div class="inisial">' + inisial + '</div>' +
+                            '<h3>' + profil.nama + '</h3>' +
+                            '<span class="jabatan">' + profil.pekerjaan + '</span>' +
+                            '<div class="detail">' +
+                            '<span>📍 ' + profil.lokasi + '</span>' +
+                            '<span>✉️ ' + profil.email + '</span>' +
+                            '</div>';
+
+                        hasilDiv.appendChild(kartu);
+                    });
+                })
+                .catch(function (err) {
+                    tombol.textContent = 'Tampilkan Profil';
+                    tombol.disabled = false;
+
+                    pesanError.textContent = '⚠️ ' + err.message;
+                    pesanError.style.display = 'block';
+                });
+        });
+    </script>
+
+</body>
+
+</html>
