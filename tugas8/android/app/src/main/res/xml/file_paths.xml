@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Konfigurasi path yang diizinkan oleh FileProvider.
+  Digunakan oleh image_picker saat menyimpan foto sementara dari kamera.
+-->
+<paths>
+    <external-path name="external_files" path="."/>
+    <cache-path name="cache" path="."/>
+    <external-cache-path name="external_cache" path="."/>
+    <files-path name="files" path="."/>
+</paths>
