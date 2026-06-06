@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361179071207",
+    "project_id": "tugas9-a9df7",
+    "storage_bucket": "tugas9-a9df7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361179071207:android:dd01b9b0b1373bd4741842",
+        "android_client_info": {
+          "package_name": "com.example.todo_fcm_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARV2yqMrfP9hnYZgYC_m7g6cBeay2-MR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
